@@ -14,6 +14,8 @@ class Input {
   
   void mousePressed() {
     switch (game.getState()) {
+      case Loading:
+        break;
       case Intro:
         game.setState(GameState.Level);
         break;
@@ -28,6 +30,9 @@ class Input {
   
   void keyPressed() {
     switch (game.getState()) {
+      case Loading:
+      case Intro:
+        break;
       case Level:
         switch (key) {
           case 'w':
@@ -48,11 +53,16 @@ class Input {
             break;
         }
         break;
+      case Outro:
+        break;
     }
   }
 
   void keyReleased() {
     switch (game.getState()) {
+      case Loading:
+      case Intro:
+        break;
       case Level:
         switch (key) {
           case 'w':
@@ -72,6 +82,8 @@ class Input {
             ship.isRight(false);
             break;
         }
+        break;
+      case Outro:
         break;
     }
   }

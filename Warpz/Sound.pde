@@ -1,3 +1,5 @@
+// Copyright (c) Fuyu Games AB, 2024
+
 class Sound {
   Game game;
   
@@ -6,16 +8,18 @@ class Sound {
   SoundFile outroMusic;
 
   SoundFile fire;
+  SoundFile die;
   
   Sound(Game game) {
     this.game = game;
     
-    this.introMusic = new SoundFile(Warpz.this, "intro.wav");
-    this.levelMusic = new SoundFile(Warpz.this, "music.wav");
-    this.outroMusic = new SoundFile(Warpz.this, "intro.wav");
+    this.introMusic = new SoundFile(Warpz.this, Settings.SOUND_INTRO);
+    this.levelMusic = new SoundFile(Warpz.this, Settings.SOUND_MUSIC);
+    this.outroMusic = new SoundFile(Warpz.this, Settings.SOUND_OUTRO);
 
-    this.fire = new SoundFile(Warpz.this, "laser.wav");
+    this.fire = new SoundFile(Warpz.this, Settings.SOUND_FIRE);
     fire.amp(0.25);
+    this.die = new SoundFile(Warpz.this, Settings.SOUND_DIE);
   }
   
   void playIntroMusic() {
@@ -43,5 +47,10 @@ class Sound {
   void playFire() {
     if (!Settings.SOUND) return;
     fire.play();
+  }
+  
+  void playDie() {
+    if (!Settings.SOUND) return;
+    die.play();
   }
 }

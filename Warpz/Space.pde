@@ -24,6 +24,8 @@ class Space {
   
   void draw() {
     switch (game.getState()) {
+      case Loading:
+        break;
       case Intro:
       case Level:
         background(0);
@@ -31,6 +33,8 @@ class Space {
         for (int i = 0; i < TOTAL_STARS; i++) {
           stars[i].draw();
         }
+        break;
+      case Outro:
         break;
     }
   }

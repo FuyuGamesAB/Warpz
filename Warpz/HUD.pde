@@ -16,11 +16,13 @@ class HUD {
   
   void draw() {
     switch (game.getState()) {
+      case Loading:
+        break;
       case Intro:
         int x = width / 4;
         int y = height / 4;
         
-        image(logo, width / 4, 50);
+        image(logo, width / 4, 10);
         
         font.draw("DURING A WARP-JUMP THE ENERGY CELLS STARTED MISHAVE DUE TO MISCALCULATION", x, y+10);
         font.draw("THIS LEAD TO AN UNSTABLE ENERGY FIELD BEING CREATED INTO SUBSPACE", x, y+30);
@@ -48,6 +50,8 @@ class HUD {
         font.draw("LEVEL:", width / 2 - 50, 10);
         font.draw("0" + level, width / 2 + 5, 10);
         popMatrix();
+        break;
+      case Outro:
         break;
     }
   }

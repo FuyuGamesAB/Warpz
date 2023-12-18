@@ -9,8 +9,7 @@ class Level {
     this.game = game;
   }
   
-  void loadLevel1() {
-    actors.add(new Virus(game));
+  void load() {
   }
   
   void draw() {
@@ -23,5 +22,9 @@ class Level {
   
   boolean isCleared() {
     return actors.size() < 1;
+  }
+  
+  void kill(Actor actor) {
+    actors.remove(actor);
   }
 }

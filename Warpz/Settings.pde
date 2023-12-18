@@ -23,4 +23,10 @@ static class Settings {
   static final String IMAGE_FONT = "ascii.bmp";
   static final String IMAGE_LOGO = "logo.png";
   
+  static final String SOUND_INTRO = "intro.wav";
+  static final String SOUND_MUSIC = "music.wav";
+  static final String SOUND_OUTRO = "intro.wav";
+  static final String SOUND_FIRE = "laser.wav";
+  static final String SOUND_DIE = "die.wav";
+  
 }

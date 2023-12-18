@@ -38,6 +38,6 @@ class Alien extends Actor {
   }
       
   void die() {
-    dispose();
+    game.getLevel().kill(this);
   }
 }

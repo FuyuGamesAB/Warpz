@@ -1,3 +1,5 @@
+// Copyright (c) Fuyu Games AB, 2024
+
 enum GameState {
   Loading,
   Intro,
@@ -13,7 +15,6 @@ class State {
   
   State(Game game) {
     this.game = game;
-    setState(Settings.STARTSTATE);
   }
   
   GameState getState() {
@@ -71,6 +72,7 @@ class State {
   
   void beginLoading() {
     loadingTime = Settings.LOADINGTIME;
+    game.setLevel(0);
   }
   
   void currentLoading() {
@@ -87,6 +89,7 @@ class State {
   
   void beginIntro() {
     game.getSound().playIntroMusic();
+    game.setLevel(1);
   }
   
   void currentIntro() {
@@ -98,7 +101,7 @@ class State {
   
   void beginLevel() {
     game.getSound().playLevelMusic();
-    game.getLevel().loadLevel1();
+    game.setLevel(2);
   }
   
   void currentLevel() {

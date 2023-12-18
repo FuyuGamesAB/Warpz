@@ -1,10 +1,11 @@
-class Loading {
-  Game game;
+// Copyright (c) Fuyu Games AB, 2024
+
+class LoadingLevel extends Level {
   Font font;
   int lines = 20;
   
-  Loading(Game game) {
-    this.game = game;
+  LoadingLevel(Game game) {
+    super(game);
     this.font = new Font();
   }
   
