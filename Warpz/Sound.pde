@@ -20,6 +20,7 @@ class Sound {
     this.fire = new SoundFile(Warpz.this, Settings.SOUND_FIRE);
     fire.amp(0.25);
     this.die = new SoundFile(Warpz.this, Settings.SOUND_DIE);
+    die.amp(0.25);
   }
   
   void playIntroMusic() {

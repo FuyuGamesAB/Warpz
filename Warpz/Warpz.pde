@@ -1,7 +1,8 @@
 // Copyright (c) Fuyu Games AB, 2024
 
 // Warpz
-// v1.0, 20231217 - First version
+// v1, 20231217 - First version (~24h)
+// v2, 20231220 - Some additional polish (~6h)
 
 Game game;
 

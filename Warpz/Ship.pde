@@ -22,6 +22,8 @@ class Ship extends Actor {
   boolean fireWarmup = false;
   float fireSpeed = Settings.FIRE_SPEED;
   float fireMillis = fireSpeed;
+  
+  int lives = Settings.LIVES;
 
   Ship(Game game) {
     super(game);
@@ -30,46 +32,61 @@ class Ship extends Actor {
     this.location = new PVector(100.0, height * 0.5);
   }
   
+  ArrayList<Bullet> getBullets() {
+    return bullets;
+  }
+  
   void draw() {
-    if (isUp) {
-      location.y -= MOVE_SPEED;
-    } else if (isDown) {
-      location.y += MOVE_SPEED;
+    switch (game.getState()) {
+      case Level:
+        if (isUp) {
+          location.y -= MOVE_SPEED;
+        } else if (isDown) {
+          location.y += MOVE_SPEED;
+        }
+        
+        if (isLeft) {
+          location.x -= MOVE_SPEED;
+        } else if (isRight) {
+          location.x += MOVE_SPEED;
+        }
+        
+        if (location.x < MIN_X) location.x = MIN_X;
+        if (location.x > MAX_X) location.x = MAX_X;
+        if (location.y < MIN_Y) location.y = MIN_Y;
+        if (location.y > MAX_Y) location.y = MAX_Y;
+        
+        pushMatrix();
+        translate(location.x, location.y);
+        shape(model);
+        if (Settings.DEBUG) {
+          rect(-25, -10, 50, 15);
+        }
+        popMatrix();
+        
+        if (fireWarmup) {
+          fireMillis -= 1;
+          if (fireMillis < 1) {
+            fireMillis = fireSpeed;
+            fireWarmup = false;
+          }
+        }
+        
+        for (int i = 0; i < bullets.size(); i++) {
+          Bullet b = bullets.get(i);
+          b.draw();
+          if (b.location.x >= width) {
+            bullets.remove(b);
+          }
+        }
+        break;
     }
-    
-    if (isLeft) {
-      location.x -= MOVE_SPEED;
-    } else if (isRight) {
-      location.x += MOVE_SPEED;
-    }
-    
-    if (location.x < MIN_X) location.x = MIN_X;
-    if (location.x > MAX_X) location.x = MAX_X;
-    if (location.y < MIN_Y) location.y = MIN_Y;
-    if (location.y > MAX_Y) location.y = MAX_Y;
-    
-    pushMatrix();
-    translate(location.x, location.y);
-    shape(model);
-    if (Settings.DEBUG) {
-      rect(-25, -10, 50, 15);
-    }
-    popMatrix();
-    
-    if (fireWarmup) {
-      fireMillis -= 1;
-      if (fireMillis < 1) {
-        fireMillis = fireSpeed;
-        fireWarmup = false;
-      }
-    }
-    
-    for (int i = 0; i < bullets.size(); i++) {
-      Bullet b = bullets.get(i);
-      b.draw();
-      if (b.location.x >= width) {
-        bullets.remove(b);
-      }
+  }
+  
+  void hit(Actor actor) {
+    lives--;
+    if (lives <= 0) {
+      game.setState(GameState.Gameover);
     }
   }
   

@@ -1,12 +1,10 @@
 // Copyright (c) Fuyu Games AB, 2024
 
 static class Collision {
-  
-  static final float TOLERANCE = 10;
-  
-  static boolean isColliding(Actor rectangleActor, Actor circleActor) {
-    float distance = rectangleActor.location.dist(circleActor.location);
-    if (distance <= TOLERANCE) {
+
+  static boolean isColliding(Actor actor, Actor otherActor) {
+    float distance = actor.location.dist(otherActor.location);
+    if (distance <= Settings.COLLISION_TOLERANCE) {
       return true;
     }
     return false;

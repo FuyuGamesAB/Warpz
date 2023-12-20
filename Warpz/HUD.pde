@@ -3,6 +3,7 @@
 class HUD {
   Game game;
   Font font;
+  Font font2;
   PImage logo;
   
   int lives = Settings.LIVES;
@@ -10,22 +11,23 @@ class HUD {
   
   HUD(Game game) {
     this.game = game;
-    this.font = new Font();
+    this.font = new Font(FontType.Black);
+    this.font2 = new Font(FontType.White);
     this.logo = loadImage(Settings.IMAGE_LOGO); 
   }
   
   void draw() {
+    int x = width / 4;
+    int y = height / 4;
+    boolean even = millis() % 4 == 1;
     switch (game.getState()) {
       case Loading:
         break;
       case Intro:
-        int x = width / 4;
-        int y = height / 4;
+        image(logo, x, 10);
         
-        image(logo, width / 4, 10);
-        
-        font.draw("DURING A WARP-JUMP THE ENERGY CELLS STARTED MISHAVE DUE TO MISCALCULATION", x, y+10);
-        font.draw("THIS LEAD TO AN UNSTABLE ENERGY FIELD BEING CREATED INTO SUBSPACE", x, y+30);
+        font.draw("DURING A WARP-JUMP THE ENERGY CELLS STARTED MISBEHAVE DUE TO MISCALCULATIONS", x, y+10);
+        font.draw("THIS LEAD TO AN UNSTABLE ENERGY FIELD BEING CREATED IN SUBSPACE", x, y+30);
         font.draw("WITH CREATURES FLOODING THE GLAXY WE MUST ACT QUICKLY", x, y+50);
         
         font.draw("ELIMINATE THE THREAT AND SEAL THE SUBSPACE BREACH", x, y+90);
@@ -38,9 +40,10 @@ class HUD {
         font.draw("D IS RIGHT", x, y+260);
         font.draw("MOUSE CLICK TO SHOOT", x, y+280);
         
-        font.draw("MOUSE CLICK TO CONTINUE", x, y+400);
+        if (!even) font.draw("MOUSE CLICK TO CONTINUE", x, y+400);
+        if (even) font2.draw("MOUSE CLICK TO CONTINUE", x, y+400);
         
-        font.draw("V1 20231218", 10, height - 20);
+        font.draw(Settings.VERSION, 10, height - 20);
         break;
       case Level:
         pushMatrix();
@@ -52,6 +55,22 @@ class HUD {
         popMatrix();
         break;
       case Outro:
+        pushMatrix();
+        translate(0, 0);
+        image(logo, x, 10);
+        font.draw("THANK YOU FOR PLAYING!", x, y+100);
+        if (!even) font.draw("MOUSE CLICK TO CONTINUE", x, y+400);
+        if (even) font2.draw("MOUSE CLICK TO CONTINUE", x, y+400);
+        popMatrix();
+        break;
+      case Gameover:
+        pushMatrix();
+        translate(0, 0);
+        image(logo, x, 10);
+        font.draw("GAME OVER!", x, y+100);
+        if (!even) font.draw("MOUSE CLICK TO CONTINUE", x, y+400);
+        if (even) font2.draw("MOUSE CLICK TO CONTINUE", x, y+400);
+        popMatrix();
         break;
     }
   }

@@ -12,6 +12,7 @@ class Virus extends Alien {
   }
   
   void update() {
+    super.update();
     theta += 0.025;
     location.y = height / 2 + sin(theta) * amplitude;
     location.x -= speed;

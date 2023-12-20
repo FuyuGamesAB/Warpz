@@ -4,7 +4,8 @@ enum GameState {
   Loading,
   Intro,
   Level,
-  Outro
+  Outro,
+  Gameover
 }
 
 class State {
@@ -35,9 +36,12 @@ class State {
       case Outro:
         endOutro();
         break;
+      case Gameover:
+        endGameover();
+        break;
     }
     this.state = newState;
-        switch (state) {
+    switch (state) {
       case Loading:
         beginLoading();
         break;
@@ -49,6 +53,9 @@ class State {
         break;
       case Outro:
         beginOutro();
+        break;
+      case Gameover:
+        beginGameover();
         break;
     }
   }
@@ -67,12 +74,15 @@ class State {
       case Outro:
         currentOutro();
         break;
+      case Gameover:
+        currentGameover();
+        break;
     }
   }
   
   void beginLoading() {
     loadingTime = Settings.LOADINGTIME;
-    game.setLevel(0);
+    game.setLevel(LevelState.Loading);
   }
   
   void currentLoading() {
@@ -89,7 +99,7 @@ class State {
   
   void beginIntro() {
     game.getSound().playIntroMusic();
-    game.setLevel(1);
+    game.setLevel(LevelState.Intro);
   }
   
   void currentIntro() {
@@ -101,7 +111,7 @@ class State {
   
   void beginLevel() {
     game.getSound().playLevelMusic();
-    game.setLevel(2);
+    game.setLevel(LevelState.Ingame);
   }
   
   void currentLevel() {
@@ -113,12 +123,25 @@ class State {
   
   void beginOutro() {
     game.getSound().playOutroMusic();
+    game.setLevel(LevelState.Outro);
   }
   
   void currentOutro() {
   }
   
   void endOutro() {
+    game.getSound().stopMusic();
+  }
+  
+  void beginGameover() {
+    game.getSound().playOutroMusic();
+    game.setLevel(LevelState.Failed);
+  }
+  
+  void currentGameover() {
+  }
+  
+  void endGameover() {
     game.getSound().stopMusic();
   }
 }

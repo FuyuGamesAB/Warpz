@@ -42,6 +42,25 @@ class Star extends Actor {
         popMatrix();
         break;
       case Outro:
+        pushMatrix();
+        noStroke();
+        fill(255);
+        location.y += speed;
+        if (location.y < 0) {
+          location.x = random(0, width);
+          location.y = 0;
+        }
+        translate(location.x, location.y);
+        ellipse(size, size, size, size);
+        popMatrix();
+        break;
+      case Gameover:
+        pushMatrix();
+        noStroke();
+        fill(255);
+        translate(location.x, location.y);
+        ellipse(size, size, size, size);
+        popMatrix();
         break;
     }
   }

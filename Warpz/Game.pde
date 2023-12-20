@@ -1,22 +1,22 @@
 // Copyright (c) Fuyu Games AB, 2024
 
 class Game {
-  Space space;
   Ship ship;
   HUD hud;
   Input input;
   State state;
   Sound sound;
+  Space space;
   ArrayList<Level> levels;
   Level level;
   
   Game() {
     this.state = new State(this);
-    this.space = new Space(this);
     this.ship = new Ship(this);
     this.input = new Input(this);
     this.hud = new HUD(this);
     this.sound = new Sound(this);
+    this.space = new Space(this);
     this.levels = createLevels();
     setState(Settings.STARTSTATE);
   }
@@ -26,11 +26,31 @@ class Game {
     levels.add(new LoadingLevel(this));
     levels.add(new IntroLevel(this));
     levels.add(new IngameLevel(this));
+    levels.add(new OutroLevel(this));
+    levels.add(new FailedLevel(this));
     return levels;
   }
   
-  void setLevel(int index) {
-    Level current = levels.get(index);
+  void setLevel(LevelState levelState) {
+    Level current;
+    switch (levelState) {
+      case Loading:
+        current = levels.get(0);
+        break;
+      case Intro:
+        current = levels.get(1);
+        break;
+      default:
+      case Ingame:
+        current = levels.get(2);
+        break;
+      case Outro:
+        current = levels.get(3);
+        break;
+      case Failed:
+        current = levels.get(4);
+        break;
+    }
     current.load();
     this.level = current;
   }
@@ -41,6 +61,10 @@ class Game {
   
   void setState(GameState state) {
     this.state.setState(state);
+  }
+  
+  Space getSpace() {
+    return space;
   }
   
   Ship getShip() {
@@ -60,25 +84,9 @@ class Game {
   }
   
   void draw() {
-    switch (state.getState()) {
-      case Loading:
-        levels.get(0).draw();
-        break;
-      case Intro:
-        levels.get(1).draw();
-        space.draw();
-        hud.draw();
-        break;
-      case Level:
-        space.draw();
-        ship.draw();
-        levels.get(2).draw();
-        hud.draw();        
-        input.draw();
-        break;
-      case Outro:
-        break;
-    }
+    level.draw();
+    ship.draw();
+    hud.draw();
   }
   
   void mousePressed() {

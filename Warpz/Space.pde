@@ -2,40 +2,31 @@
 
 class Space {
   Game game;
+  ArrayList<Star> stars;
   
-  int TOTAL_STARS = Settings.TOTAL_STARS;
-  
-  Star[] stars;
- 
   Space(Game game) {
     this.game = game;
-    
-    stars = new Star[TOTAL_STARS];
-    for (int i = 0; i < TOTAL_STARS; i++) {
+    this.stars = new ArrayList<>();
+  }
+  
+  void load() {
+    stars.clear();
+    for (int i = 0; i < Settings.TOTAL_STARS; i++) {
       Star star = new Star(game,
         round(random(1, 3)), 
         round(random(0, width)),
         round(random(0, height)),
         round(random(5, 10))
       );
-      stars[i] = star;
+      stars.add(star);
     }
   }
   
   void draw() {
-    switch (game.getState()) {
-      case Loading:
-        break;
-      case Intro:
-      case Level:
-        background(0);
-        lights();
-        for (int i = 0; i < TOTAL_STARS; i++) {
-          stars[i].draw();
-        }
-        break;
-      case Outro:
-        break;
+    for (int i = 0; i < Settings.TOTAL_STARS; i++) {
+      Star star = stars.get(i);
+      star.update();
+      star.draw();
     }
   }
 }

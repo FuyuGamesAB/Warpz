@@ -4,6 +4,7 @@ class Actor {
   Game game;
   
   PVector location;
+  boolean isDead = false;
   
   Actor(Game game) {
     this.game = game;

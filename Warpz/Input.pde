@@ -9,9 +9,6 @@ class Input {
     this.ship = game.getShip();
   }
   
-  void draw() {
-  }
-  
   void mousePressed() {
     switch (game.getState()) {
       case Loading:
@@ -23,7 +20,10 @@ class Input {
         ship.fire();
         break;
       case Outro:
-        exit();
+        game.setState(GameState.Level);
+        break;
+      case Gameover:
+        game.setState(GameState.Level);
         break;
     }
   }
@@ -55,6 +55,8 @@ class Input {
         break;
       case Outro:
         break;
+      case Gameover:
+        break;
     }
   }
 
@@ -84,6 +86,8 @@ class Input {
         }
         break;
       case Outro:
+        break;
+      case Gameover:
         break;
     }
   }

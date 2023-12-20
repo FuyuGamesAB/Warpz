@@ -1,5 +1,10 @@
 // Copyright (c) Fuyu Games AB, 2024
 
+enum FontType {
+  White,
+  Black
+}
+
 class Font {
   PImage image;
   PImage[] glyphs;
@@ -10,8 +15,16 @@ class Font {
   int glyphSize = 8;
   int fontSize = 8;
   
-  Font() {
-    this.image = loadImage(Settings.IMAGE_FONT);
+  Font(FontType type) {
+    switch (type) {
+      default:
+      case Black:
+        this.image = loadImage(Settings.IMAGE_FONT_BLACK);
+        break;
+      case White:
+        this.image = loadImage(Settings.IMAGE_FONT_WHITE);
+        break;
+    }
     this.glyphs = new PImage[rows * columns];
     for (int g = 0; g < glyphs.length; g++) {
       int c = g % columns * glyphSize;

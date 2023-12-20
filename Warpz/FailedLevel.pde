@@ -1,7 +1,7 @@
 // Copyright (c) Fuyu Games AB, 2024
 
-class IntroLevel extends Level {
-  IntroLevel(Game game) {
+class FailedLevel extends Level {
+  FailedLevel(Game game) {
     super(game);
   }
   

@@ -6,11 +6,15 @@ class LoadingLevel extends Level {
   
   LoadingLevel(Game game) {
     super(game);
-    this.font = new Font();
+  }
+  
+  void load() {
+    super.load();
+    this.font = new Font(FontType.White);
   }
   
   void draw() { 
-    background(0xFFFFFF);
+    super.draw();
     
     for (int line = 0; line < lines; line++) {
       stroke(color(random(0, 255), random(0, 255), random(0, 255)));

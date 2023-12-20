@@ -12,15 +12,12 @@ class Alien extends Actor {
   }
   
   void update() {
-    Ship ship = game.getShip();
-    if (Collision.isColliding(ship, this)) {
-      exit();  // @TODO
-    }
+
   }
   
   void draw() {
-    update();
-    
+    if (isDead) return;
+    update();  
     pushMatrix();
     translate(location.x, location.y);
     shape(model);
@@ -30,14 +27,11 @@ class Alien extends Actor {
     popMatrix();
   }
   
-  void hit() {
+  void hit(Actor actor) {
     health--;
     if (health < 1) {
-      die();
+      isDead = true;
+      game.getLevel().kill(this);
     }
-  }
-      
-  void die() {
-    game.getLevel().kill(this);
   }
 }
