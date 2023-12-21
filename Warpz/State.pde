@@ -12,7 +12,7 @@ class State {
   GameState state = Settings.STARTSTATE;
   Game game;
   
-  int loadingTime;
+  int waitTime;
   
   State(Game game) {
     this.game = game;
@@ -81,32 +81,39 @@ class State {
   }
   
   void beginLoading() {
-    loadingTime = Settings.LOADINGTIME;
+    waitTime = Settings.LOADINGTIME;
     game.setLevel(LevelState.Loading);
   }
   
   void currentLoading() {
-    loadingTime -= 1;
-    if (loadingTime <= 0) {
+    waitTime -= 1;
+    if (waitTime <= 0) {
       setState(GameState.Intro);
       return;
     }
   }
   
   void endLoading() {
-    loadingTime = 0;
+    waitTime = 0;
   }
   
   void beginIntro() {
     game.getSound().playIntroMusic();
     game.setLevel(LevelState.Intro);
+    waitTime = Settings.WAITTIME;
   }
   
   void currentIntro() {
+    waitTime -= 1;
+    if (waitTime <= 0) {
+      game.getInput().setEnabled(true);
+    }
   }
   
   void endIntro() {
     game.getSound().stopMusic();
+    game.getLevel().unload();
+    waitTime = 0;
   }
   
   void beginLevel() {
@@ -119,29 +126,45 @@ class State {
   
   void endLevel() {
     game.getSound().stopMusic();
+    game.getLevel().unload();
+    game.getInput().setEnabled(false);
   }
   
   void beginOutro() {
     game.getSound().playOutroMusic();
     game.setLevel(LevelState.Outro);
+    waitTime = Settings.WAITTIME;
   }
   
   void currentOutro() {
+    waitTime -= 1;
+    if (waitTime <= 0) {
+      game.getInput().setEnabled(true);
+    }
   }
   
   void endOutro() {
     game.getSound().stopMusic();
+    game.getLevel().unload();
+    waitTime = 0;
   }
   
   void beginGameover() {
     game.getSound().playOutroMusic();
     game.setLevel(LevelState.Failed);
+    waitTime = Settings.WAITTIME;
   }
   
   void currentGameover() {
+    waitTime -= 1;
+    if (waitTime <= 0) {
+      game.getInput().setEnabled(true);
+    }
   }
   
   void endGameover() {
     game.getSound().stopMusic();
+    game.getLevel().unload();
+    waitTime = 0;
   }
 }

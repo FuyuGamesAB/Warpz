@@ -4,11 +4,13 @@ class Actor {
   Game game;
   
   PVector location;
+  PVector rotation;
   boolean isDead = false;
   
   Actor(Game game) {
     this.game = game;
     this.location = new PVector();
+    this.rotation = new PVector();
   }
   
   void update() {

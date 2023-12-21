@@ -8,6 +8,7 @@ class Sound {
   SoundFile outroMusic;
 
   SoundFile fire;
+  SoundFile hit;
   SoundFile die;
   
   Sound(Game game) {
@@ -19,6 +20,8 @@ class Sound {
 
     this.fire = new SoundFile(Warpz.this, Settings.SOUND_FIRE);
     fire.amp(0.25);
+    this.hit = new SoundFile(Warpz.this, Settings.SOUND_HIT);
+    hit.amp(0.25);
     this.die = new SoundFile(Warpz.this, Settings.SOUND_DIE);
     die.amp(0.25);
   }
@@ -49,7 +52,12 @@ class Sound {
     if (!Settings.SOUND) return;
     fire.play();
   }
-  
+
+  void playHit() {
+    if (!Settings.SOUND) return;
+    hit.play();
+  }
+
   void playDie() {
     if (!Settings.SOUND) return;
     die.play();

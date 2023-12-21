@@ -4,6 +4,7 @@ static class Settings {
   static final String VERSION = "V2 20231220";  
   static final int FRAMERATE = 60;
   static final int LOADINGTIME = 75;
+  static final int WAITTIME = 75;
   static final int TOTAL_STARS = 50;
   static final GameState STARTSTATE = GameState.Loading;
   
@@ -11,7 +12,7 @@ static class Settings {
   static final boolean SOUND = true;
   static final boolean MUSIC = true;
 
-  static final int LIVES = 3;
+  static final int LIVES = 1;
   static final int FIRE_SPEED = 10;
   static final int BULLET_SPEED = 10;
   static final int MOVE_SPEED = 10;
@@ -30,5 +31,6 @@ static class Settings {
   static final String SOUND_OUTRO = "outro.mp3";
   static final String SOUND_FIRE = "laser.wav";
   static final String SOUND_DIE = "die.wav";
+  static final String SOUND_HIT = "hit.wav";
   
 }

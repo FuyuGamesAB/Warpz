@@ -19,7 +19,10 @@ class Level {
   }
   
   void load() {
-
+    
+  }
+  
+  void unload() {
   }
   
   void draw() {
@@ -32,6 +35,7 @@ class Level {
   }
   
   void kill(Actor actor) {
+    game.getSound().playDie();
     actors.remove(actor);
     current = null;
   }

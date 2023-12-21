@@ -11,6 +11,9 @@ class IngameLevel extends Level {
   
   void load() {
     super.load();
+    Ship ship = game.getShip();
+    ship.reset();
+
     game.getSpace().load();
     actors.clear();
     actors.add(new Virus(game));
@@ -18,6 +21,15 @@ class IngameLevel extends Level {
     actors.add(new Virus(game));
     actors.add(new Virus(game));
     actors.add(new Virus(game));
+  }
+  
+  void unload() {
+    super.unload();
+    for (int i = 0; i < actors.size(); i++) {
+      Actor actor = actors.get(i);
+      actor = null;
+    }
+    actors.clear();
   }
   
   void draw() {
@@ -38,6 +50,7 @@ class IngameLevel extends Level {
     
     Ship ship = game.getShip();
     if (Collision.isColliding(ship, current)) {
+      game.getSound().playDie();
       ship.hit(current);
     }
     
@@ -45,6 +58,7 @@ class IngameLevel extends Level {
     for (int i = 0; i < bullets.size(); i++) {
       Bullet bullet = bullets.get(i);
       if (Collision.isColliding(bullet, current)) {
+        game.getSound().playHit();
         actors.remove(current);
         current = null;
         break;

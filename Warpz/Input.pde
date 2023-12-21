@@ -4,12 +4,23 @@ class Input {
   Game game;
   Ship ship;
   
+  boolean inputEnabled = false;
+  
   Input(Game game) {
     this.game = game;
     this.ship = game.getShip();
   }
   
+  void setEnabled(boolean toggle) {
+    this.inputEnabled = toggle;
+  }
+  
+  boolean isEnabled() {
+    return inputEnabled;
+  }
+  
   void mousePressed() {
+    if (!inputEnabled) return;
     switch (game.getState()) {
       case Loading:
         break;
@@ -29,6 +40,7 @@ class Input {
   }
   
   void keyPressed() {
+    if (!inputEnabled) return;
     switch (game.getState()) {
       case Loading:
       case Intro:
@@ -61,6 +73,7 @@ class Input {
   }
 
   void keyReleased() {
+    if (!inputEnabled) return;
     switch (game.getState()) {
       case Loading:
       case Intro:

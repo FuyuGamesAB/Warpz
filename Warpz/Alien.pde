@@ -12,7 +12,9 @@ class Alien extends Actor {
   }
   
   void update() {
-
+    rotation.x += 0.075;
+    rotation.y += 0.05;
+    rotation.z += 0.1;
   }
   
   void draw() {
@@ -20,6 +22,9 @@ class Alien extends Actor {
     update();  
     pushMatrix();
     translate(location.x, location.y);
+    rotateX(rotation.x);
+    rotateY(rotation.y);
+    rotateZ(rotation.z);
     shape(model);
     if (Settings.DEBUG) {
       ellipse(0, 0, 30, 30);

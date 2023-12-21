@@ -36,6 +36,12 @@ class Ship extends Actor {
     return bullets;
   }
   
+  void reset() {
+    isUp = isDown = isLeft = isRight = false; 
+    location.x = 100.0f;
+    location.y = height * 0.5;
+  }
+  
   void draw() {
     switch (game.getState()) {
       case Level:

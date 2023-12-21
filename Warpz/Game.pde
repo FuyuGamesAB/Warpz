@@ -79,6 +79,10 @@ class Game {
     return level;
   }
   
+  Input getInput() {
+    return input;
+  }
+  
   void update() {
     state.update();
   }
