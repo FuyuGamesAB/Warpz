@@ -1,26 +1,32 @@
-Game
- Name: Warpz
- Type: Sidescroll, Space, Arcade, Shooter
+# Warpz
 
-Protagonist
- FTL Spaceship Generation IV 
-  A Warp 2 Capable Spaceship (2x Faster Than 'Light')
+* Name 
+    * Warpz
+* Type
+    * Side-scroll, Space, Arcade, Shooter
+* Language
+    * Processing (Java-based)
 
-Story
- Introduction
-  ...
+## Protagonist
 
- Ending
-  ...
+FTL Spaceship Generation IV - A Warp 2 Capable Spaceship (2x Faster Than 'Light')
 
-Levels
- 1. Viruses, black
+## Story
 
-Aliens          Health      Speed     Damage
- Virus          Low         High      Low
- 
-Weapons         Damage      Speed     Ammo
- Laser          Low         Normal    Endless
+Your mission is to save the galaxy.
 
-Powerup
+## Level
 
+| Alien  | Health | Speed  | Damage |
+|--------|--------|--------|--------|
+| Virus  | Low    | High   | Low    |
+
+## Weapons
+
+| Weapons | Damage  | Speed   | Ammo    |
+|---------|---------|---------|---------|
+| Laser   | Low     | Normal  | Endless |
+
+## Powerups
+
+...
